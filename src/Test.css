@@ -1,0 +1,55 @@
+.Test {
+  width: 100%;
+  max-width: 350px;
+  background-color: burlywood;
+  padding: 10px;
+  margin: 0 auto;
+  border-radius: 5px;
+}
+.Test > * {
+  display: block;
+  border-radius: 10px;
+  margin-bottom: 5px;
+}
+.Test * {
+  border-radius: 10px;
+  margin-bottom: 5px;
+}
+.Test img {
+  width: 100%;
+  height: 400px;
+}
+.Test .QA {
+  width: 100%;
+  background-color: bisque;
+  padding: 10px;
+}
+.Test .QA h3 {
+  background-color: coral;
+  padding: 5px;
+  text-align: center;
+}
+.Test .options {
+  width: 100%;
+  position: relative;
+  column-count: 2;
+}
+.Test .options button {
+  width: 100%;
+  /* I added a fixed height to prevent displacement of option buttons when adding more thicker border on hover. */
+  height: 60px;
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.Test .options button:enabled:hover {
+  cursor: pointer;
+  border: solid darkslateblue 5px;
+}
+.Test .options button:disabled {
+  border-color: white;
+}
+.Test .options button.selected {
+  border: solid darkslateblue 5px;
+  color: inherit;
+}
