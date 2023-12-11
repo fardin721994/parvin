@@ -29,7 +29,7 @@ const options = [
   { feeling: "چندش 🤢", id: "disgust" },
 ];
 const waitingTime = 500; // The time gap between qustions
-const answerTime = 2000; // The time to answer a question
+const answerTime = 4000; // The time to answer a question
 const numberOfQuestions = 6;
 let answers = Array.from({ length: numberOfQuestions }, (_, i) => null); // This array will include 60 items and each item will be true, false or null, corresponding to correct answer, wrong answer or not answered respectively.
 // This function will shuffle any given array:
