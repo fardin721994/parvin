@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import "./Test.css";
 import Results from "./Results";
+import Waiting from "./Waiting";
+import LoadingSpinner from "./LoadingSpinner";
 
 // Every image is implying one of these emotions:
 const emotions = [
@@ -83,9 +85,9 @@ function Test() {
       {finished ? (
         <Results answers={answers} />
       ) : waiting ? (
-        <div> waiting</div>
+        <Waiting />
       ) : (
-        <div>
+        <div className="main">
           <img src={require(`../public/images/${imageNumber}.jpg`)} />
           <div className="QA">
             <h3>شخص چه حسی دارد؟</h3>

@@ -1,0 +1,12 @@
+.Waiting {
+  height: 100%;
+  background-color: burlywood;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.Waiting div {
+  width: fit-content;
+  background-color: cadetblue;
+  padding: 20px;
+}
