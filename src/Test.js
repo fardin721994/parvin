@@ -88,7 +88,7 @@ function Test() {
         <Waiting />
       ) : (
         <div className="main">
-          <img src={require(`../public/images/${imageNumber}.jpg`)} />
+          <img src={require(`./images/${imageNumber}.jpg`)} />
           <div className="QA">
             <h3>شخص چه حسی دارد؟</h3>
             <div className="options">
