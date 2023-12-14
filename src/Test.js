@@ -22,13 +22,21 @@ const colors = [
   "#8ab852",
 ];
 // the options in the test (possible answers):
+// const options = [
+//   { feeling: "شاد 😀", id: "happiness" },
+//   { feeling: "غمگین 😞", id: "sadness" },
+//   { feeling: "متعجب 😮", id: "surprise" },
+//   { feeling: "عصبانی 😡", id: "anger" },
+//   { feeling: "ترسیده 😨", id: "fear" },
+//   { feeling: "چندش 🤢", id: "disgust" },
+// ];
 const options = [
-  { feeling: "شاد 😀", id: "happiness" },
-  { feeling: "غمگین 😞", id: "sadness" },
-  { feeling: "متعجب 😮", id: "surprise" },
-  { feeling: "عصبانی 😡", id: "anger" },
-  { feeling: "ترسیده 😨", id: "fear" },
-  { feeling: "چندش 🤢", id: "disgust" },
+  { feeling: "شاد", id: "happiness" },
+  { feeling: "غمگین", id: "sadness" },
+  { feeling: "متعجب", id: "surprise" },
+  { feeling: "عصبانی", id: "anger" },
+  { feeling: "ترسیده", id: "fear" },
+  { feeling: "چندش", id: "disgust" },
 ];
 const waitingTime = 2000; // The time gap between qustions
 const answerTime = 4000; // The time to answer a question
