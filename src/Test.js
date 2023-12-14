@@ -30,7 +30,7 @@ const options = [
   { feeling: "ترسیده 😨", id: "fear" },
   { feeling: "چندش 🤢", id: "disgust" },
 ];
-const waitingTime = 500; // The time gap between qustions
+const waitingTime = 2000; // The time gap between qustions
 const answerTime = 4000; // The time to answer a question
 const numberOfQuestions = 6;
 let answers = Array.from({ length: numberOfQuestions }, (_, i) => null); // This array will include 60 items and each item will be true, false or null, corresponding to correct answer, wrong answer or not answered respectively.
@@ -49,24 +49,33 @@ function Test() {
   const [waiting, setWaiting] = useState(false); // are we in the gap between questions or not(are we waiting for the next question).
   const [selectedOption, setSelectedOption] = useState(null);
   const [results, setResults] = useState(null);
+  const [image, setImage] = useState(
+    <img src={require(`./images/${shuffledArray1to60[0]}.jpg`)} />
+  );
 
   ////////////
   const imageNumber = shuffledArray1to60[index];
   const correctAnswer = emotions[(imageNumber - 1) % 6];
-  // console.log("correctAnswer", correctAnswer);
-  // console.log("waiting : ", waiting);
+  console.log("correctAnswer", correctAnswer);
+  console.log("waiting : ", waiting);
   if (index === numberOfQuestions) finished = true;
   /////////////
   useEffect(
     function () {
       const timeValue = waiting ? waitingTime : answerTime;
       if (waiting) setSelectedOption(null);
+      // let nextImage;
+
       const timeout = setTimeout(() => {
-        !waiting && setIndex((previous) => previous + 1);
+        !waiting && !finished && setIndex((previousIndex) => previousIndex + 1);
+        if (!waiting && index + 1 < numberOfQuestions) {
+          const imageNum = shuffledArray1to60[index + 1];
+          const nextImage = <img src={require(`./images/${imageNum}.jpg`)} />;
+          setImage(nextImage);
+        }
         if (!finished) setWaiting((previous) => !previous);
         else setResults(answers);
       }, timeValue);
-
       return function () {
         clearTimeout(timeout);
       };
@@ -88,7 +97,8 @@ function Test() {
         <Waiting />
       ) : (
         <div className="main">
-          <img src={require(`./images/${imageNumber}.jpg`)} />
+          {/* <img src={require(`../public/images/${imageNumber}.jpg`)} /> */}
+          {image}
           <div className="QA">
             <h3>شخص چه حسی دارد؟</h3>
             <div className="options">
