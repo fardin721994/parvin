@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./App.css";
+import "./fonts/Vazirmatn-Regular.ttf";
 import Main from "./Main";
 import Test from "./Test";
 import Results from "./Results";

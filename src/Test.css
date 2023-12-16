@@ -35,6 +35,8 @@
   background-color: coral;
   padding: 5px;
   text-align: center;
+  font-size: 22px;
+  color: maroon;
 }
 .Test .options {
   width: 100%;

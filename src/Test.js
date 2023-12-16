@@ -64,15 +64,12 @@ function Test() {
   ////////////
   const imageNumber = shuffledArray1to60[index];
   const correctAnswer = emotions[(imageNumber - 1) % 6];
-  console.log("correctAnswer", correctAnswer);
-  console.log("waiting : ", waiting);
   if (index === numberOfQuestions) finished = true;
   /////////////
   useEffect(
     function () {
       const timeValue = waiting ? waitingTime : answerTime;
       if (waiting) setSelectedOption(null);
-      // let nextImage;
 
       const timeout = setTimeout(() => {
         !waiting && !finished && setIndex((previousIndex) => previousIndex + 1);
