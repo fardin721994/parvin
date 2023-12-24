@@ -1,0 +1,63 @@
+.TestPage {
+  background-color: #dbf9d8;
+  padding: 10px;
+  flex-grow: 1;
+  /* min-height: 100vh; */
+}
+.TestPage section {
+  max-width: 300px;
+  margin: 10px auto;
+  padding: 10px;
+  border-radius: 10px;
+}
+.TestPage a {
+  display: block;
+  width: fit-content;
+  margin: 15px auto;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: 600;
+  border: solid 2px darkgreen;
+}
+.TestPage .sampleTest a {
+  background-color: lightgreen;
+  color: saddlebrown;
+}
+.TestPage .mainTest a {
+  background-color: chartreuse;
+}
+.TestPage a:hover {
+  background-color: green;
+  color: snow;
+}
+.TestPage .sampleTest {
+  background-color: powderblue;
+  color: navy;
+}
+.TestPage .mainTest {
+  background-color: #008f99;
+  color: azure;
+}
+@media screen and (min-width: 600px) {
+  .TestPage .wrapper {
+    display: flex;
+    /* height: max-content; */
+    justify-content: space-around;
+    align-items: stretch;
+  }
+  .TestPage .wrapper section {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+  }
+  .TestPage .wrapper section p {
+    flex-grow: 1;
+  }
+  /* .TestPage .wrapper .sampleTest {
+    height: fit-content;
+  } */
+  /* .TestPage .wrapper .mainTest {
+    height: fit-content;
+  } */
+}

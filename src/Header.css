@@ -1,0 +1,46 @@
+.Header {
+  padding: 10px 20px;
+  /* display: flex; */
+  background-color: #dbf9d8;
+  text-align: center;
+}
+.Header img {
+  width: 100%;
+  border-radius: 80px;
+}
+.Header h2 {
+  font-size: xx-large;
+  color: darkolivegreen;
+  margin-bottom: 20px;
+}
+.Header h2 span {
+  color: firebrick;
+}
+.Header a {
+  font-size: x-large;
+  background-color: darkgoldenrod;
+  padding: 3px 10px;
+  margin: 15px;
+  border: solid 2px saddlebrown;
+  border-radius: 25px;
+  cursor: pointer;
+  color: floralwhite;
+}
+.Header a:hover {
+  background-color: coral;
+}
+.Header .welcome {
+  margin-bottom: 40px;
+}
+@media screen and (min-width: 750px) {
+  .Header {
+    display: flex;
+    align-items: center;
+  }
+  .Header .welcome {
+    width: 50%;
+  }
+  .Header img {
+    width: 50%;
+  }
+}

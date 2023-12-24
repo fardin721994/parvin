@@ -13,5 +13,5 @@ td {
   background-color: bisque;
   border: solid 2px orange;
   padding: 3px;
-  margin-bottom: 5px;
+  margin-bottom: 5px 10px;
 }
