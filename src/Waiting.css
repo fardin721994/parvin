@@ -1,12 +1,21 @@
-.Waiting {
+.Waiting[data-display="true"] {
   height: 100%;
-  background-color: burlywood;
+  background-color: #dbf9d8;
   display: flex;
   justify-content: center;
   align-items: center;
+  /*  */
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
 }
 .Waiting div {
   width: fit-content;
   background-color: cadetblue;
   padding: 20px;
+}
+.Waiting[data-display="false"] {
+  display: none;
 }

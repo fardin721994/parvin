@@ -40,7 +40,7 @@ const options = [
   { feeling: "چندش", id: "disgust" },
 ];
 const waitingTime = 2000; // The time gap between qustions
-const answerTime = 4000; // The time to answer a question
+const answerTime = 6000; // The time to answer a question
 
 // This function will shuffle any given array:
 const shuffleArray = (array) => array.sort((a, b) => 0.5 - Math.random());
@@ -59,13 +59,9 @@ function Test() {
   const [results, setResults] = useState(null);
   const testType = useParams().type;
   const [image, setImage] = useState(
-    <img
-      src={require(`./images/${testType}/${shuffledArray1to60[0]}.jpg`)}
-      onLoad={() => setImageIsLoading(false)}
-    />
+    <img src={require(`./images/${testType}/${shuffledArray1to60[0]}.jpg`)} />
   );
-
-  const [imageIsLoading, setImageIsLoading] = useState(true);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   ////////
   const numberOfQuestions = testType === "sample" ? 6 : 60;
@@ -81,36 +77,27 @@ function Test() {
   /////////////
   useEffect(
     function () {
-      if (!imageIsLoading) {
-        const timeValue = waiting ? waitingTime : answerTime;
-        if (waiting) setSelectedOption(null);
+      const timeValue = waiting ? waitingTime : answerTime;
+      if (waiting) setSelectedOption(null);
 
-        const timeout = setTimeout(() => {
-          !waiting &&
-            !finished &&
-            setIndex((previousIndex) => previousIndex + 1);
-          if (!waiting && index + 1 < numberOfQuestions) {
-            const imageNum = shuffledArray1to60[index + 1];
-            const nextImage = (
-              <img
-                src={require(`./images/${testType}/${imageNum}.jpg`)}
-                onLoad={() => setImageIsLoading(false)}
-              />
-            );
-            setImage(nextImage);
-            setImageIsLoading(true);
-          }
-          if (!finished) setWaiting((previous) => !previous);
-          else setResults(answers);
-        }, timeValue);
-        return function () {
-          clearTimeout(timeout);
-        };
-      }
+      const timeout = setTimeout(() => {
+        !waiting && !finished && setIndex((previousIndex) => previousIndex + 1);
+        if (!waiting && index + 1 < numberOfQuestions) {
+          const imageNum = shuffledArray1to60[index + 1];
+          const nextImage = (
+            <img src={require(`./images/${testType}/${imageNum}.jpg`)} />
+          );
+          setImage(nextImage);
+        }
+        if (!finished) setWaiting((previous) => !previous);
+        else setResults(answers);
+      }, timeValue);
+      return function () {
+        clearTimeout(timeout);
+      };
     },
-    [waiting, imageIsLoading]
+    [waiting]
   );
-  ///////////
 
   //////////
   const handleSelectOption = (optionId) => {
@@ -129,6 +116,8 @@ function Test() {
     <div className="Test" dir="rtl">
       {finished ? (
         <Results answers={answers} />
+      ) : waiting ? (
+        <Waiting />
       ) : (
         <div className="main">
           {image}
@@ -151,7 +140,6 @@ function Test() {
               ))}
             </div>
           </div>
-          <Waiting display={(imageIsLoading || waiting).toString()} />
         </div>
       )}
     </div>

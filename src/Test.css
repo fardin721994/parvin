@@ -1,12 +1,13 @@
 .Test {
   width: 100%;
   flex-grow: 1;
-  background-color: burlywood;
+  background-color: #dbf9d8;
   padding: 10px;
   border-radius: 5px;
   /*  Some thing strange happened. Without setting an absolute value for the height of .Test, flex-grow would affect it but setting .main to height:100% wouldn't work. Here is set it to 100 px and it will grow to fill what remains from viewport height except for navbar:*/
   /* height: 100px; */
   /* overflow: overlay; */
+  position: relative;
 }
 .Test > * {
   display: block;
