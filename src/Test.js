@@ -40,7 +40,7 @@ const options = [
   { feeling: "چندش", id: "disgust" },
 ];
 const waitingTime = 2000; // The time gap between qustions
-const answerTime = 4000; // The time to answer a question
+const answerTime = 6000; // The time to answer a question
 
 // This function will shuffle any given array:
 const shuffleArray = (array) => array.sort((a, b) => 0.5 - Math.random());
