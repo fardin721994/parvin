@@ -36,6 +36,8 @@
   .Header {
     display: flex;
     align-items: center;
+    padding-top: 70px;
+    padding-bottom: 150px;
   }
   .Header .welcome {
     width: 50%;
