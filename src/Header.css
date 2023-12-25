@@ -13,6 +13,11 @@
   color: darkolivegreen;
   margin-bottom: 20px;
 }
+@media screen and (min-width: 375px) {
+  .Header h2 br:first-child {
+    display: none;
+  }
+}
 .Header h2 span {
   color: firebrick;
 }
@@ -27,7 +32,8 @@
   color: floralwhite;
 }
 .Header a:hover {
-  background-color: coral;
+  background-color: darkgreen;
+  border-color: darkgreen;
 }
 .Header .welcome {
   margin-bottom: 40px;

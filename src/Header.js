@@ -7,6 +7,7 @@ function Header() {
       <div className="welcome">
         <h2>
           به آزمون
+          <br />
           <span> بازشناسی هیجان</span>
           <br />
           خوش آمدید

@@ -12,6 +12,6 @@ td {
 .results section {
   background-color: bisque;
   border: solid 2px orange;
-  padding: 3px;
-  margin-bottom: 5px 10px;
+  padding: 10px;
+  margin-bottom: 10px;
 }

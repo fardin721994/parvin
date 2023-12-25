@@ -5,7 +5,7 @@
   justify-content: space-between;
   position: relative;
   height: 70px;
-  padding: 0 25px;
+  padding: 5px 25px;
 }
 .NavBar h3 {
   width: 100px;
@@ -52,7 +52,7 @@
   border: solid 2px black;
 }
 .NavBar .menu-button:hover {
-  background-color: coral;
+  background-color: green;
 }
 .NavBar .selected {
   background-color: cyan;
@@ -85,6 +85,10 @@
     width: fit-content;
     margin-left: 30px;
     background-color: inherit;
+  }
+  .NavBar #nav ul li a:hover {
+    color: firebrick;
+    font-weight: 600;
   }
   .NavBar .selected {
     font-weight: 600;
