@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import logo from "./logo.jpg";
 import "./NavBar.css";
 
 // const tabs = [
