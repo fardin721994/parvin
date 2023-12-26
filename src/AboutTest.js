@@ -1,7 +1,7 @@
-import "./Body.css";
-function Body() {
+import "./AboutTest.css";
+function AboutTest() {
   return (
-    <section className="Body">
+    <section className="AboutTest">
       <h2>درباره آزمون</h2>
       <p>
         از جمله کارهای بزرگ پل اکمن، تلاش برای تحلیل و ارزیابی فراگیر بودن علائم
@@ -24,4 +24,4 @@ function Body() {
     </section>
   );
 }
-export default Body;
+export default AboutTest;

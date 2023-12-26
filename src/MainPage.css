@@ -1,0 +1,55 @@
+.MainPage {
+    padding: 10px 20px;
+    /* display: flex; */
+    background-color: #dbf9d8;
+    text-align: center;
+  }
+  .MainPage img {
+    width: 100%;
+    border-radius: 80px;
+  }
+  .MainPage h2 {
+    font-size: xx-large;
+    color: darkolivegreen;
+    margin-bottom: 20px;
+  }
+  @media screen and (min-width: 375px) {
+    .MainPage h2 br:first-child {
+      display: none;
+    }
+  }
+  .MainPage h2 span {
+    color: firebrick;
+  }
+  .MainPage a {
+    font-size: x-large;
+    background-color: darkgoldenrod;
+    padding: 3px 10px;
+    margin: 15px;
+    border: solid 2px saddlebrown;
+    border-radius: 25px;
+    cursor: pointer;
+    color: floralwhite;
+  }
+  .MainPage a:hover {
+    background-color: darkgreen;
+    border-color: darkgreen;
+  }
+  .MainPage .welcome {
+    margin-bottom: 40px;
+  }
+  @media screen and (min-width: 750px) {
+    .MainPage {
+      display: flex;
+      align-items: center;
+      padding-top: 70px;
+      padding-bottom: 150px;
+    }
+    .MainPage .welcome {
+      width: 50%;
+    }
+    .MainPage img {
+      width: 50%;
+    }
+  }
+  

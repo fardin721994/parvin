@@ -1,4 +1,5 @@
 .AboutUs {
+  flex-grow: 1;
   background-color: #ecf87f;
   padding: 15px;
   font-size: larger;

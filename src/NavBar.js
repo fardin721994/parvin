@@ -11,8 +11,8 @@ import "./NavBar.css";
 const tabs = [
   { title: "صفحه اصلی", to: "/" },
   { title: "آزمون", to: "/testpage" },
-  { title: "درباره آزمون", to: "/" },
-  { title: "درباره ما", to: "/" },
+  { title: "درباره آزمون", to: "/about-test" },
+  { title: "درباره ما", to: "/about-us" },
 ];
 function NavBar(props) {
   const [selectedTab, setSelectedTab] = useState("صفحه اصلی");
@@ -28,7 +28,10 @@ function NavBar(props) {
       <nav className={showNav ? "" : "hidden"} id="nav">
         <ul>
           {tabs.map(({ title, to }) => (
-            <li key={title} className={title === selectedTab ? "selected" : ""}>
+            <li
+              key={title}
+              // className={title === selectedTab ? "selected" : ""}
+            >
               <NavLink to={to} onClick={() => handleNavClick(title)}>
                 {title}
               </NavLink>

@@ -1,10 +1,11 @@
-.Body {
+.AboutTest {
+  flex-grow: 1;
   background-color: #dcf2ff;
   padding: 15px;
   font-size: larger;
   color: midnightblue;
 }
-.Body h2 {
+.AboutTest h2 {
   text-align: center;
   margin-bottom: 20px;
 }

@@ -4,14 +4,9 @@ import "./fonts/Vazirmatn-Regular.ttf";
 import NavBar from "./NavBar";
 import MainPage from "./MainPage";
 import Test from "./Test";
-import Results from "./Results";
-import Waiting from "./Waiting";
-import {
-  BrowserRouter as Router,
-  Route,
-  Redirect,
-  Switch,
-} from "react-router-dom";
+import AboutTest from "./AboutTest";
+import AboutUs from "./AboutUs";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import TestPage from "./TestPage";
 function App() {
   return (
@@ -19,24 +14,17 @@ function App() {
       {/* <Results /> */}
       {/* <Waiting /> */}
       {/* <TestPage /> */}
-      <Router>
+      <BrowserRouter>
         <NavBar />
-        <Switch>
-          <Route path="/" exact>
-            <MainPage />
-          </Route>
-          <Route path="/testpage" exact>
-            <TestPage />
-          </Route>
-          <Route path="/test/:type" exact>
-            <Test />
-          </Route>
-          <Redirect to="/" />
-        </Switch>
-      </Router>
-      {/* <Route path="/courses/view/:courseId" exact>
-            <CourseView />
-          </Route> */}
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/testpage" element={<TestPage />} />
+          <Route path="/test/:type" element={<Test />} />
+          <Route path="/about-test" element={<AboutTest />} />
+          <Route path="/about-us" element={<AboutUs />} />
+          <Route path="*" element={<MainPage />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

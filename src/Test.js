@@ -50,7 +50,6 @@ for (let i = 0; i < 10; i++) {
   const newArray = Array.from({ length: 6 }, (_, j) => i * 6 + j + 1);
   shuffledArray1to60 = [...shuffledArray1to60, ...shuffleArray(newArray)];
 }
-let finished = false;
 /////////
 function Test() {
   const [index, setIndex] = useState(0); // this index will increment one by one from 0 to 59
@@ -66,6 +65,7 @@ function Test() {
   );
 
   const [imageIsLoading, setImageIsLoading] = useState(true);
+  const [finished, setFinished] = useState(false);
 
   ////////
   const numberOfQuestions = testType === "sample" ? 6 : 60;
@@ -77,7 +77,7 @@ function Test() {
   ////////////
   const imageNumber = shuffledArray1to60[index];
   const correctAnswer = emotions[(imageNumber - 1) % 6];
-  if (index === numberOfQuestions) finished = true;
+  if (index === numberOfQuestions && !finished) setFinished(true);
   /////////////
   useEffect(
     function () {

@@ -55,7 +55,7 @@
 .NavBar .menu-button:hover {
   background-color: green;
 }
-.NavBar .selected {
+.NavBar .active {
   background-color: cyan;
   font-weight: 500;
 }
@@ -83,17 +83,21 @@
     align-items: center;
   }
   .NavBar #nav ul li {
+    background-color: inherit;
     width: fit-content;
     margin-left: 30px;
-    background-color: inherit;
   }
   .NavBar #nav ul li a:hover {
     color: firebrick;
     font-weight: 600;
   }
-  .NavBar .selected {
+  .NavBar .active {
+    background-color: inherit;
     font-weight: 600;
     color: navy;
     border-bottom: solid 3px;
+  }
+  .NavBar .logo {
+    border: none;
   }
 }
