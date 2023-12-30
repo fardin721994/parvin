@@ -71,17 +71,3 @@
   color: inherit;
   opacity: 1;
 }
-.Test .navigation {
-  background-color: bisque;
-  display: flex;
-  align-items: center;
-  justify-content: end;
-  margin-bottom: 0;
-}
-.Test .navigation button {
-  font-size: larger;
-  padding: 2px 5px;
-  width: 80px;
-  background-color: darkgreen;
-  color: white;
-}

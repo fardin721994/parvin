@@ -66,7 +66,6 @@ function Test() {
 
   const [imageIsLoading, setImageIsLoading] = useState(true);
   const [finished, setFinished] = useState(false);
-  const [next, setNext] = useState(false);
 
   ////////
   const numberOfQuestions = testType === "sample" ? 6 : 60;
@@ -80,24 +79,7 @@ function Test() {
   /////////////
   useEffect(
     function () {
-      if (next) {
-        !waiting && !finished && setIndex((previousIndex) => previousIndex + 1);
-        if (!waiting && index + 1 < numberOfQuestions) {
-          const imageNum = shuffledArray1to60[index + 1];
-          const nextImage = (
-            <img
-              src={require(`./images/${testType}/${imageNum}.jpg`)}
-              onLoad={() => setImageIsLoading(false)}
-            />
-          );
-          setImage(nextImage);
-          setImageIsLoading(true);
-          setNext(false);
-        }
-        if (!finished) setWaiting((previous) => !previous);
-        else setResults(answers);
-      }
-      if (!imageIsLoading && !next) {
+      if (!imageIsLoading) {
         const timeValue = waiting ? waitingTime : answerTime;
         if (waiting) setSelectedOption(null);
 
@@ -124,7 +106,7 @@ function Test() {
         };
       }
     },
-    [waiting, imageIsLoading, next]
+    [waiting, imageIsLoading]
   );
   ///////////
 
@@ -166,9 +148,6 @@ function Test() {
                 </button>
               ))}
             </div>
-          </div>
-          <div className="navigation">
-            <button onClick={() => setNext((pre) => !pre)}> بعدی</button>
           </div>
           <Waiting display={(imageIsLoading || waiting).toString()} />
         </div>

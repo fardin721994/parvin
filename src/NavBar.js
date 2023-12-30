@@ -19,7 +19,9 @@ function NavBar() {
         <ul>
           {tabs.map(({ title, to }) => (
             <li key={title}>
-              <NavLink to={to}>{title}</NavLink>
+              <NavLink to={to} onClick={() => setShowNav(false)}>
+                {title}
+              </NavLink>
             </li>
           ))}
         </ul>
