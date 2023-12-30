@@ -75,7 +75,7 @@
   background-color: bisque;
   display: flex;
   align-items: center;
-  justify-content: end;
+  justify-content: center;
   margin-bottom: 0;
 }
 .Test .navigation button {
