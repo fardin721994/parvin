@@ -8,7 +8,7 @@ const emotions = [
   "surprise",
 ];
 const emojis = ["😡", "🤢", "😨", "😀", "😞", "😮"];
-function Results({ answers }) {
+function Results({ answers, name }) {
   let data = emotions.map((emotion, index) => ({
     emotion,
     emoji: emojis[index],
@@ -30,9 +30,10 @@ function Results({ answers }) {
     wrong: numberOfInAnswers(false),
     missed: numberOfInAnswers(null),
   };
-
+  const text = "نتایج آزمون" + " " + name + " " + "به صورت زیر است";
   return (
     <div dir="ltr" className="results">
+      <legend>{text}</legend>
       <section>
         <p>Results aggregate:</p>
         <table>

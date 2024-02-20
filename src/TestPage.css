@@ -39,6 +39,13 @@
   background-color: #008f99;
   color: azure;
 }
+.TestPage .wrapper .name label {
+  display: block;
+  text-align: center;
+}
+.TestPage .wrapper .name input {
+  padding: 5px;
+}
 @media screen and (min-width: 600px) {
   .TestPage .wrapper {
     display: flex;
@@ -54,10 +61,4 @@
   .TestPage .wrapper section p {
     flex-grow: 1;
   }
-  /* .TestPage .wrapper .sampleTest {
-    height: fit-content;
-  } */
-  /* .TestPage .wrapper .mainTest {
-    height: fit-content;
-  } */
 }

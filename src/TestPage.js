@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 
 import "./TestPage.css";
-function TestPage() {
+function TestPage({ name, setName }) {
+  const handleInputChange = (event) => setName(event.target.value);
   return (
     <div className="TestPage">
       <div className="wrapper">
@@ -21,6 +22,15 @@ function TestPage() {
           </p>
           <NavLink to="/test/main">شروع آزمون اصلی</NavLink>
         </section>
+        <div className="name">
+          <label htmlFor="name">نام آزموننده</label>
+          <input
+            type="text"
+            id="name"
+            value={name}
+            onChange={handleInputChange}
+          />
+        </div>
       </div>
     </div>
   );

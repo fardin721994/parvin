@@ -39,8 +39,8 @@ const options = [
   { feeling: "ترسیده", id: "fear" },
   { feeling: "چندش", id: "disgust" },
 ];
-const waitingTime = 2000; // The time gap between qustions
-const answerTime = 6000; // The time to answer a question
+const waitingTime = 1000; // The time gap between qustions
+const answerTime = 600000; // The time to answer a question
 
 // This function will shuffle any given array:
 const shuffleArray = (array) => array.sort((a, b) => 0.5 - Math.random());
@@ -51,7 +51,7 @@ for (let i = 0; i < 10; i++) {
   shuffledArray1to60 = [...shuffledArray1to60, ...shuffleArray(newArray)];
 }
 /////////
-function Test() {
+function Test({ name }) {
   const [index, setIndex] = useState(0); // this index will increment one by one from 0 to 59
   const [waiting, setWaiting] = useState(false); // are we in the gap between questions or not(are we waiting for the next question).
   const [selectedOption, setSelectedOption] = useState(null);
@@ -144,7 +144,7 @@ function Test() {
   return (
     <div className="Test" dir="rtl">
       {finished ? (
-        <Results answers={answers} />
+        <Results answers={answers} name={name} />
       ) : (
         <div className="main">
           {image}
@@ -170,6 +170,7 @@ function Test() {
           <div className="navigation">
             <button onClick={() => setNext((pre) => !pre)}> بعدی</button>
           </div>
+
           <Waiting display={(imageIsLoading || waiting).toString()} />
         </div>
       )}
