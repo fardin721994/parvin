@@ -7,6 +7,7 @@ const tabs = [
   { title: "آزمون", to: "testpage" },
   { title: "درباره آزمون", to: "about-test" },
   { title: "درباره ما", to: "about-us" },
+  { title: "داده ها", to: "data" },
 ];
 function NavBar() {
   const [showNav, setShowNav] = useState(false);

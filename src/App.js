@@ -9,6 +9,7 @@ import AboutTest from "./AboutTest";
 import AboutUs from "./AboutUs";
 import TestPage from "./TestPage";
 import { useState } from "react";
+import DataList from "./DataList";
 
 const initialProfileData = {
   firstName: "",
@@ -34,6 +35,7 @@ function App() {
           <Route path="test/:type" element={<Test profile={profile} />} />
           <Route path="about-test" element={<AboutTest />} />
           <Route path="about-us" element={<AboutUs />} />
+          <Route path="data" element={<DataList />} />
           <Route path="*" element={<MainPage />} />
         </Routes>
       </BrowserRouter>
