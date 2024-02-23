@@ -1,4 +1,6 @@
-import "./Results.css";
+import { useState } from "react";
+import axios from "axios";
+import "./Results.scss";
 const emotions = [
   "anger",
   "disgust",
@@ -8,7 +10,45 @@ const emotions = [
   "surprise",
 ];
 const emojis = ["😡", "🤢", "😨", "😀", "😞", "😮"];
-function Results({ answers, name }) {
+////////
+////////
+////////
+function Results({ answers, profile }) {
+  const [message, setMessage] = useState("");
+  const [messageColor, setMessageColor] = useState("green");
+  // Handlers 👇 :
+  const handleSaveResults = async () => {
+    try {
+      // ! ALWAYS REMEMBER WHEN YOU CHANGE .env FILE, YOU NEED TO RESTART THE APPLICATION (STOP IT USING Ctrl+c AND START IT AGAIN)
+      const res = await axios.post(
+        process.env.REACT_APP_BACKEND_URL + "/results",
+        // "http://localhost:5000/api/results",
+
+        {
+          profile,
+          results: {
+            byEachQuestion: answers,
+            byEachEmotion: data,
+            byAnswerStatus: {
+              correct: sum.correct,
+              wrong: sum.wrong,
+              missed: sum.missed,
+            },
+          },
+        }
+      );
+      setMessage("Results saved successfully");
+      setMessageColor("green");
+    } catch (error) {
+      setMessage("Something went wrong and couldn't save the results");
+      setMessageColor("red");
+      console.log(error);
+    }
+  };
+  // Handlers 👆
+
+  // Calculations 👇 :
+
   let data = emotions.map((emotion, index) => ({
     emotion,
     emoji: emojis[index],
@@ -30,7 +70,17 @@ function Results({ answers, name }) {
     wrong: numberOfInAnswers(false),
     missed: numberOfInAnswers(null),
   };
-  const text = "نتایج آزمون" + " " + name + " " + "به صورت زیر است";
+  const text =
+    "نتایج آزمون" +
+    " " +
+    `${!profile.sex ? "" : profile.sex === "مرد" ? "آقای" : "خانم"}` +
+    " " +
+    profile.firstName +
+    " " +
+    profile.lastName +
+    " " +
+    "به صورت زیر است";
+  // Calculations 👆
   return (
     <div dir="ltr" className="results">
       <legend>{text}</legend>
@@ -103,6 +153,10 @@ function Results({ answers, name }) {
           </tbody>
         </table>
       </section>
+      <div className="save">
+        <button onClick={handleSaveResults}>save</button>
+        <p style={{ color: messageColor }}>{message}</p>
+      </div>
     </div>
   );
 }

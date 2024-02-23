@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-
 import "./TestPage.css";
-function TestPage({ name, setName }) {
-  const handleInputChange = (event) => setName(event.target.value);
+import Profile from "./Profile";
+function TestPage({ profile, setProfile }) {
   return (
     <div className="TestPage">
       <div className="wrapper">
+        <Profile profile={profile} setProfile={setProfile} />
         <section className="sampleTest">
           <p>
             هدف از آزمون نمونه، آشنایی کاربر با آزمون اصلی است. در آزمون نمونه ۶
@@ -22,15 +22,6 @@ function TestPage({ name, setName }) {
           </p>
           <NavLink to="/test/main">شروع آزمون اصلی</NavLink>
         </section>
-        <div className="name">
-          <label htmlFor="name">نام آزموننده</label>
-          <input
-            type="text"
-            id="name"
-            value={name}
-            onChange={handleInputChange}
-          />
-        </div>
       </div>
     </div>
   );

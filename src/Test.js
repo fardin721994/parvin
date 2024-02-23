@@ -51,7 +51,7 @@ for (let i = 0; i < 10; i++) {
   shuffledArray1to60 = [...shuffledArray1to60, ...shuffleArray(newArray)];
 }
 /////////
-function Test({ name }) {
+function Test({ profile }) {
   const [index, setIndex] = useState(0); // this index will increment one by one from 0 to 59
   const [waiting, setWaiting] = useState(false); // are we in the gap between questions or not(are we waiting for the next question).
   const [selectedOption, setSelectedOption] = useState(null);
@@ -144,7 +144,7 @@ function Test({ name }) {
   return (
     <div className="Test" dir="rtl">
       {finished ? (
-        <Results answers={answers} name={name} />
+        <Results answers={answers} profile={profile} />
       ) : (
         <div className="main">
           {image}

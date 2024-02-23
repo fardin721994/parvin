@@ -1,0 +1,38 @@
+.Profile {
+  background-color: skyblue;
+  color: darkblue;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  & > div {
+    width: 100%;
+    input[type="text"] {
+      width: 100%;
+    }
+  }
+
+  & > legend {
+    text-align: center;
+    font-weight: 600;
+  }
+  label {
+    display: block;
+  }
+  input {
+    padding: 3px;
+  }
+  .sex {
+    width: 100%;
+    label {
+      display: inline;
+    }
+    fieldset {
+      border: none;
+      & > div {
+        display: inline;
+        margin: 0 20px;
+      }
+    }
+  }
+}

@@ -1,0 +1,40 @@
+.results {
+  table {
+    border-collapse: collapse;
+    border-spacing: 0px;
+    text-align: center;
+  }
+
+  table,
+  th,
+  td {
+    padding: 5px;
+    border: 3px solid black;
+  }
+  section {
+    background-color: bisque;
+    border: solid 2px orange;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  legend {
+    text-align: center;
+  }
+  .save {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    button {
+      width: 200px;
+      background-color: green;
+      color: white;
+      // border-radius: 5px;
+      padding: 5px;
+      &:hover {
+        background-color: lightgreen;
+        color: green;
+      }
+    }
+  }
+}

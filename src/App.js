@@ -10,8 +10,16 @@ import AboutUs from "./AboutUs";
 import TestPage from "./TestPage";
 import { useState } from "react";
 
+const initialProfileData = {
+  firstName: "",
+  lastName: "",
+  age: "",
+  sex: "",
+  groupCode: "",
+  caseCode: "",
+};
 function App() {
-  const [name, setName] = useState("");
+  const [profile, setProfile] = useState(initialProfileData);
 
   return (
     <div className="App" dir="rtl">
@@ -21,9 +29,9 @@ function App() {
           <Route index element={<MainPage />} />
           <Route
             path="testpage"
-            element={<TestPage name={name} setName={setName} />}
+            element={<TestPage profile={profile} setProfile={setProfile} />}
           />
-          <Route path="test/:type" element={<Test name={name} />} />
+          <Route path="test/:type" element={<Test profile={profile} />} />
           <Route path="about-test" element={<AboutTest />} />
           <Route path="about-us" element={<AboutUs />} />
           <Route path="*" element={<MainPage />} />
