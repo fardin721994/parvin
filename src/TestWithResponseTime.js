@@ -53,16 +53,18 @@ for (let i = 0; i < 10; i++) {
 /////////
 function Test({ profile }) {
   const [index, setIndex] = useState(0); // this index will increment one by one from 0 to 59
+  const [waiting, setWaiting] = useState(false); // are we in the gap between questions or not(are we waiting for the next question).
   const [selectedOption, setSelectedOption] = useState(null);
   const [results, setResults] = useState(null);
   const testType = useParams().type;
   const [image, setImage] = useState(
     <img
       src={require(`./images/${testType}/${shuffledArray1to60[0]}.jpg`)}
-      //   onLoad={() => setImageIsLoading(false)}
+      onLoad={() => setImageIsLoading(false)}
     />
   );
 
+  const [imageIsLoading, setImageIsLoading] = useState(true);
   const [finished, setFinished] = useState(false);
   const [next, setNext] = useState(false);
 
@@ -76,22 +78,57 @@ function Test({ profile }) {
   const correctAnswer = emotions[(imageNumber - 1) % 6];
   if (index === numberOfQuestions && !finished) setFinished(true);
   /////////////
+  useEffect(
+    function () {
+      if (next) {
+        !waiting && !finished && setIndex((previousIndex) => previousIndex + 1);
+        if (!waiting && index + 1 < numberOfQuestions) {
+          const imageNum = shuffledArray1to60[index + 1];
+          const nextImage = (
+            <img
+              src={require(`./images/${testType}/${imageNum}.jpg`)}
+              onLoad={() => setImageIsLoading(false)}
+            />
+          );
+          setImage(nextImage);
+          setImageIsLoading(true);
+          setNext(false);
+        }
+        if (!finished) setWaiting((previous) => !previous);
+        else setResults(answers);
+      }
+      if (!imageIsLoading && !next) {
+        const timeValue = waiting ? waitingTime : answerTime;
+        if (waiting) setSelectedOption(null);
 
+        const timeout = setTimeout(() => {
+          !waiting &&
+            !finished &&
+            setIndex((previousIndex) => previousIndex + 1);
+          if (!waiting && index + 1 < numberOfQuestions) {
+            const imageNum = shuffledArray1to60[index + 1];
+            const nextImage = (
+              <img
+                src={require(`./images/${testType}/${imageNum}.jpg`)}
+                onLoad={() => setImageIsLoading(false)}
+              />
+            );
+            setImage(nextImage);
+            setImageIsLoading(true);
+          }
+          if (!finished) setWaiting((previous) => !previous);
+          else setResults(answers);
+        }, timeValue);
+        return function () {
+          clearTimeout(timeout);
+        };
+      }
+    },
+    [waiting, imageIsLoading, next]
+  );
   ///////////
-  const handleNextButtonClick = () => {
-    setIndex((previousIndex) => previousIndex + 1);
-    if (index + 1 < numberOfQuestions) {
-      const imageNum = shuffledArray1to60[index + 1];
-      const nextImage = (
-        <img src={require(`./images/${testType}/${imageNum}.jpg`)} />
-      );
-      setImage(nextImage);
-      setSelectedOption(null);
-    } else {
-      setFinished(true);
-      setResults(answers);
-    }
-  }; //////////
+
+  //////////
   const handleSelectOption = (optionId) => {
     setSelectedOption(optionId);
     const newAnswer = optionId === correctAnswer ? true : false;
@@ -131,10 +168,10 @@ function Test({ profile }) {
             </div>
           </div>
           <div className="navigation">
-            <button onClick={handleNextButtonClick}> بعدی</button>
+            <button onClick={() => setNext((pre) => !pre)}> بعدی</button>
           </div>
 
-          {/* <Waiting display={(imageIsLoading || waiting).toString()} /> */}
+          <Waiting display={(imageIsLoading || waiting).toString()} />
         </div>
       )}
     </div>
