@@ -59,6 +59,7 @@ function Test({ profile }) {
   const [image, setImage] = useState(
     <img
       src={require(`./images/${testType}/${shuffledArray1to60[0]}.jpg`)}
+      onError={handleImageLoadingFailure}
       //   onLoad={() => setImageIsLoading(false)}
     />
   );
@@ -76,14 +77,35 @@ function Test({ profile }) {
   const correctAnswer = emotions[(imageNumber - 1) % 6];
   if (index === numberOfQuestions && !finished) setFinished(true);
   /////////////
-
+  function handleImageLoadingFailure() {
+    const imageNum = shuffledArray1to60[index + 1];
+    ////////////
+    const nextImage = new Image();
+    // nextImage.src = require(`./images/${testType}/${imageNum}.jpg`);
+    nextImage.src = `./images/${testType}/${imageNum}.jpg`;
+    // nextImage.onerror = () => handleImageLoadingFailure();
+    /////////////
+    // console.log("imggggg", image);
+    // const nextImage = (
+    //   <img
+    //     src={require(`./images/${testType}/${imageNum}.jpg`)}
+    //     onError={handleImageLoadingFailure}
+    //     // data-fake={Math.random()}
+    //     // id="as"
+    //   />
+    // );
+    setImage(nextImage);
+  }
   ///////////
   const handleNextButtonClick = () => {
     setIndex((previousIndex) => previousIndex + 1);
     if (index + 1 < numberOfQuestions) {
       const imageNum = shuffledArray1to60[index + 1];
       const nextImage = (
-        <img src={require(`./images/${testType}/${imageNum}.jpg`)} />
+        <img
+          src={require(`./images/${testType}/${imageNum}.jpg`)}
+          onError={handleImageLoadingFailure}
+        />
       );
       setImage(nextImage);
       setSelectedOption(null);
@@ -91,7 +113,20 @@ function Test({ profile }) {
       setFinished(true);
       setResults(answers);
     }
-  }; //////////
+  };
+  const handlePreviousButtonClick = () => {
+    setIndex((currentIndex) => currentIndex - 1);
+    const imageNum = shuffledArray1to60[index - 1];
+    const nextImage = (
+      <img
+        src={require(`./images/${testType}/${imageNum}.jpg`)}
+        onError={handleImageLoadingFailure}
+      />
+    );
+    setImage(nextImage);
+    setSelectedOption(null);
+  };
+  //////////
   const handleSelectOption = (optionId) => {
     setSelectedOption(optionId);
     const newAnswer = optionId === correctAnswer ? true : false;
@@ -112,7 +147,19 @@ function Test({ profile }) {
         <div className="main">
           {image}
           <div className="QA">
-            <h3>شخص چه حسی دارد؟</h3>
+            <div className="QA-nav">
+              <button
+                className="previous"
+                onClick={handlePreviousButtonClick}
+                disabled={index === 0}
+              >
+                👉
+              </button>
+              <h3>شخص چه حسی دارد؟</h3>
+              <button className="next" onClick={handleNextButtonClick}>
+                👈
+              </button>
+            </div>
             <div className="options">
               {options.map((item, index) => (
                 <button
@@ -130,9 +177,9 @@ function Test({ profile }) {
               ))}
             </div>
           </div>
-          <div className="navigation">
+          {/* <div className="navigation">
             <button onClick={handleNextButtonClick}> بعدی</button>
-          </div>
+          </div> */}
 
           {/* <Waiting display={(imageIsLoading || waiting).toString()} /> */}
         </div>

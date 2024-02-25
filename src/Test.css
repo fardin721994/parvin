@@ -37,6 +37,18 @@
   margin-bottom: 0;
   padding-bottom: 0;
 }
+.Test .QA .QA-nav {
+  display: flex;
+  gap: 5px;
+}
+.Test .QA .QA-nav button {
+  flex-grow: 1;
+  font-size: 20px;
+  background-color: floralwhite;
+}
+.Test .QA .QA-nav button:hover {
+  background-color: aquamarine;
+}
 .Test .QA h3 {
   background-color: coral;
   padding: 5px;
