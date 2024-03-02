@@ -93,6 +93,8 @@ function Test({ profile }) {
         src={require(`./images/${testType}/${imageNum}.jpg`)}
         onError={() => setDoneWithImageLoading(true)}
         onLoad={() => setDoneWithImageLoading(true)}
+        // *TODO : Check this out. with the same src, react won't re-render the component event though the onError is different. That was really weird. Assigning a key prop, solved the problem as react considers this image element a different one than before  👇 (I think I even tried different ids but react considered them as the same!):
+        key={Date.now()}
       />
     );
     ////////
@@ -113,6 +115,7 @@ function Test({ profile }) {
     setImage(nextImage);
     setSelectedOption(null);
     setIsBreakTime(true);
+    setDoneWithImageLoading(false);
   };
   const goToPreviousQuestion = () => {
     setIndex((currentIndex) => currentIndex - 1);
@@ -128,6 +131,7 @@ function Test({ profile }) {
     setImage(nextImage);
     setSelectedOption(null);
     setIsBreakTime(true);
+    setDoneWithImageLoading(false);
   };
   //////////
   const handleSelectOption = (optionId) => {
