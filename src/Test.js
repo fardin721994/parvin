@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import "./Test.css";
+import "./Test.scss";
 import Results from "./Results";
 import Waiting from "./Waiting";
 import LoadingSpinner from "./LoadingSpinner";
@@ -39,7 +39,7 @@ const options = [
   { feeling: "ترسیده", id: "fear" },
   { feeling: "چندش", id: "disgust" },
 ];
-const waitingTime = 50; // The time gap between qustions
+const breakTime = 500; // The time gap between qustions
 const answerTime = 600000; // The time to answer a question
 
 // This function will shuffle any given array:
@@ -54,18 +54,19 @@ for (let i = 0; i < 10; i++) {
 function Test({ profile }) {
   const [index, setIndex] = useState(0); // this index will increment one by one from 0 to 59
   const [selectedOption, setSelectedOption] = useState(null);
-  const [results, setResults] = useState(null);
+  const [isBreakTime, setIsBreakTime] = useState(true);
+  const [doneWithImageLoading, setDoneWithImageLoading] = useState(false); // Either successfully or with failure
+  ////////
   const testType = useParams().type;
   const [image, setImage] = useState(
     <img
       src={require(`./images/${testType}/${shuffledArray1to60[0]}.jpg`)}
-      onError={handleImageLoadingFailure}
-      //   onLoad={() => setImageIsLoading(false)}
+      onError={handleRetryLoadingImage}
+      onLoad={() => setDoneWithImageLoading(true)}
     />
   );
 
   const [finished, setFinished] = useState(false);
-  const [next, setNext] = useState(false);
   const timeOutRef = useRef();
   ////////
   const numberOfQuestions = testType === "sample" ? 6 : 60;
@@ -77,54 +78,55 @@ function Test({ profile }) {
   const correctAnswer = emotions[(imageNumber - 1) % 6];
   if (index === numberOfQuestions && !finished) setFinished(true);
   /////////////
-  function handleImageLoadingFailure() {
+  function handleRetryLoadingImage() {
     const imageNum = shuffledArray1to60[index + 1];
-    ////////////
-    const nextImage = new Image();
-    // nextImage.src = require(`./images/${testType}/${imageNum}.jpg`);
-    nextImage.src = `./images/${testType}/${imageNum}.jpg`;
-    // nextImage.onerror = () => handleImageLoadingFailure();
-    /////////////
-    // console.log("imggggg", image);
-    // const nextImage = (
+    const reloadingImage = new Image();
+    reloadingImage.src = `./images/${testType}/${imageNum}.jpg`;
+    reloadingImage.onload = () => setDoneWithImageLoading(true);
+    // * This time even if there would be an error, we are going to setDoneWithImageLoading to true anyway 👇:
+    reloadingImage.onerror = () => setDoneWithImageLoading(true);
+
+    // * The following approach doesn't work because in a function component, React won't re-render the component if we are setting a state to its previous vaule again.  👇 :
+    // const reloadingImage = (
     //   <img
     //     src={require(`./images/${testType}/${imageNum}.jpg`)}
-    //     onError={handleImageLoadingFailure}
-    //     // data-fake={Math.random()}
-    //     // id="as"
+    //     onError={handleRetryLoadingImage}
+    //     onLoad={() => setDoneWithImageLoading(true)}
     //   />
     // );
-    setImage(nextImage);
+    ////////
+    setImage(reloadingImage);
   }
   ///////////
-  const handleNextButtonClick = () => {
+  const goToNextQuestion = () => {
     setIndex((previousIndex) => previousIndex + 1);
-    if (index + 1 < numberOfQuestions) {
-      const imageNum = shuffledArray1to60[index + 1];
-      const nextImage = (
-        <img
-          src={require(`./images/${testType}/${imageNum}.jpg`)}
-          onError={handleImageLoadingFailure}
-        />
-      );
-      setImage(nextImage);
-      setSelectedOption(null);
-    } else {
-      setFinished(true);
-      setResults(answers);
-    }
-  };
-  const handlePreviousButtonClick = () => {
-    setIndex((currentIndex) => currentIndex - 1);
-    const imageNum = shuffledArray1to60[index - 1];
+    if (index + 1 === numberOfQuestions) return setFinished(true);
+    const imageNum = shuffledArray1to60[index + 1];
     const nextImage = (
       <img
         src={require(`./images/${testType}/${imageNum}.jpg`)}
-        onError={handleImageLoadingFailure}
+        onError={handleRetryLoadingImage}
+        onLoad={() => setDoneWithImageLoading(true)}
       />
     );
     setImage(nextImage);
     setSelectedOption(null);
+    setIsBreakTime(true);
+  };
+  const goToPreviousQuestion = () => {
+    setIndex((currentIndex) => currentIndex - 1);
+    if (index - 1 < 0) return setIndex(0);
+    const imageNum = shuffledArray1to60[index - 1];
+    const nextImage = (
+      <img
+        src={require(`./images/${testType}/${imageNum}.jpg`)}
+        onError={handleRetryLoadingImage}
+        onLoad={() => setDoneWithImageLoading(true)}
+      />
+    );
+    setImage(nextImage);
+    setSelectedOption(null);
+    setIsBreakTime(true);
   };
   //////////
   const handleSelectOption = (optionId) => {
@@ -135,16 +137,36 @@ function Test({ profile }) {
         index === imageNumber - 1 ? newAnswer : item
       )
     );
-    if (timeOutRef.current) {
-      clearTimeout(timeOutRef.current);
-    }
+    // The first time this function runs, the timeOutRef.current will be undefined but it is fine using clearTimeout on undefined so don't worry about it 👇:
+    clearTimeout(timeOutRef.current);
     timeOutRef.current = setTimeout(() => {
-      handleNextButtonClick();
+      goToNextQuestion();
     }, 1000);
   };
-
   /////////////
+  useEffect(
+    function () {
+      if (isBreakTime) {
+        const timeOut = setTimeout(() => {
+          setIsBreakTime(false);
+        }, breakTime);
+        return function () {
+          clearTimeout(timeOut);
+        };
+      }
+      if (!isBreakTime && doneWithImageLoading) {
+        const timeOut = setTimeout(() => {
+          goToNextQuestion();
+        }, answerTime);
+        return function () {
+          clearTimeout(timeOut);
+        };
+      }
+    },
+    [isBreakTime, doneWithImageLoading]
+  );
 
+  ///////
   return (
     <div className="Test" dir="rtl">
       {finished ? (
@@ -156,14 +178,15 @@ function Test({ profile }) {
             <div className="QA-nav">
               <button
                 className="previous"
-                onClick={handlePreviousButtonClick}
+                onClick={goToPreviousQuestion}
                 disabled={index === 0}
               >
-                👉
+                {/* // *This is a html chevron icon 👇:   */}
+                &#8249;
               </button>
               <h3>شخص چه حسی دارد؟</h3>
-              <button className="next" onClick={handleNextButtonClick}>
-                👈
+              <button className="next" onClick={goToNextQuestion}>
+                &#8250;
               </button>
             </div>
             <div className="options">
@@ -183,11 +206,10 @@ function Test({ profile }) {
               ))}
             </div>
           </div>
-          {/* <div className="navigation">
-            <button onClick={handleNextButtonClick}> بعدی</button>
-          </div> */}
 
-          {/* <Waiting display={(imageIsLoading || waiting).toString()} /> */}
+          <Waiting
+            display={(isBreakTime || !doneWithImageLoading).toString()}
+          />
         </div>
       )}
     </div>

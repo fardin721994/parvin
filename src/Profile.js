@@ -22,7 +22,7 @@ function Profile({ profile, setProfile }) {
 
   return (
     <section className="Profile">
-      <legend>اطلاعات آزموننده</legend>
+      <legend>اطلاعات آزمودنی</legend>
       <div>
         <label htmlFor="firstName">نام</label>
         <input
