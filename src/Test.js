@@ -80,20 +80,21 @@ function Test({ profile }) {
   /////////////
   function handleRetryLoadingImage() {
     const imageNum = shuffledArray1to60[index + 1];
-    const reloadingImage = new Image();
-    reloadingImage.src = `./images/${testType}/${imageNum}.jpg`;
-    reloadingImage.onload = () => setDoneWithImageLoading(true);
-    // * This time even if there would be an error, we are going to setDoneWithImageLoading to true anyway 👇:
-    reloadingImage.onerror = () => setDoneWithImageLoading(true);
-
+    ////////////////////////////////////////////////////////
+    // const reloadingImage = new Image();
+    // reloadingImage.src = `./images/${testType}/${imageNum}.jpg`;
+    // reloadingImage.onload = () => setDoneWithImageLoading(true);
+    // // * This time even if there would be an error, we are going to setDoneWithImageLoading to true anyway 👇:
+    // reloadingImage.onerror = () => setDoneWithImageLoading(true);
+    //////////////////////////////////////
     // * The following approach doesn't work because in a function component, React won't re-render the component if we are setting a state to its previous vaule again.  👇 :
-    // const reloadingImage = (
-    //   <img
-    //     src={require(`./images/${testType}/${imageNum}.jpg`)}
-    //     onError={handleRetryLoadingImage}
-    //     onLoad={() => setDoneWithImageLoading(true)}
-    //   />
-    // );
+    const reloadingImage = (
+      <img
+        src={require(`./images/${testType}/${imageNum}.jpg`)}
+        onError={() => setDoneWithImageLoading(true)}
+        onLoad={() => setDoneWithImageLoading(true)}
+      />
+    );
     ////////
     setImage(reloadingImage);
   }
