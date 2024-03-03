@@ -32,14 +32,14 @@ const colors = [
 //   { feeling: "چندش 🤢", id: "disgust" },
 // ];
 const options = [
-  { feeling: "شاد", id: "happiness" },
-  { feeling: "غمگین", id: "sadness" },
-  { feeling: "متعجب", id: "surprise" },
-  { feeling: "عصبانی", id: "anger" },
-  { feeling: "ترسیده", id: "fear" },
-  { feeling: "چندش", id: "disgust" },
+  { feeling: "شادی", id: "happiness" },
+  { feeling: "غم", id: "sadness" },
+  { feeling: "تعجب", id: "surprise" },
+  { feeling: "عصبانیت", id: "anger" },
+  { feeling: "ترس", id: "fear" },
+  { feeling: "انزجار", id: "disgust" },
 ];
-const breakTime = 5000; // The time gap between qustions
+const breakTime = 500; // The time gap between qustions
 const answerTime = 600000; // The time to answer a question
 
 // This function will shuffle any given array:
