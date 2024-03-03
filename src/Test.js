@@ -170,7 +170,8 @@ function Test({ profile }) {
     },
     [isBreakTime, doneWithImageLoading]
   );
-
+  console.log("is break time:", isBreakTime);
+  console.log("doneWithImageLoading :", doneWithImageLoading);
   ///////
   return (
     <div className="Test" dir="rtl">
