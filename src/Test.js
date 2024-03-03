@@ -215,6 +215,8 @@ function Test({ profile }) {
 
           <Waiting
             display={(isBreakTime || !doneWithImageLoading).toString()}
+            setIsBreakTime={setIsBreakTime}
+            setDoneWithImageLoading={setDoneWithImageLoading}
           />
         </div>
       )}
