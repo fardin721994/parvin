@@ -2,7 +2,7 @@ import "./Waiting.css";
 function Waiting({ display, setIsBreakTime, setDoneWithImageLoading }) {
   const cancelWaiting = () => {
     setIsBreakTime(false);
-    setDoneWithImageLoading(false);
+    setDoneWithImageLoading(true);
   };
   return (
     <div className="Waiting" data-display={display}>
