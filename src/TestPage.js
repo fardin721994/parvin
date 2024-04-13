@@ -1,28 +1,26 @@
 import React, { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import "./TestPage.css";
 import Profile from "./Profile";
+import BreadCrumb from "./BreadCrumb";
+import TestTypeSelect from "./TestTypeSelect";
+import Results from "./Results";
+import Test from "./Test";
+
+const navItems = [
+  { title: "آزمون", id: "test" },
+  { title: "اطلاعات آزمودنی", id: "profile" },
+  { title: "نوع آزمون", id: "type" },
+  { title: "آزمون اصلی", id: "main-test" },
+  { title: "آزمون نمونه", id: "sample-test" },
+  ,
+  { title: "نتایج", id: "results" },
+];
 function TestPage({ profile, setProfile }) {
   return (
     <div className="TestPage">
-      <div className="wrapper">
-        <Profile profile={profile} setProfile={setProfile} />
-        <section className="sampleTest">
-          <p>
-            هدف از آزمون نمونه، آشنایی کاربر با آزمون اصلی است. در آزمون نمونه ۶
-            عکس به آزمودنی نمایش داده می شود و او باید برای هر عکس، گزینه ای را
-            که بیانگر احساس شخص است انتخاب نماید.
-          </p>
-          <NavLink to="/test/sample">شروع آزمون نمونه</NavLink>
-        </section>
-        <section className="mainTest">
-          <p>
-            در این آزمون ۶۰ عکس به آزمودنی نمایش داده می شود و او باید برای هر
-            عکس، گزینه ای را که بیانگر احساس شخص است انتخاب نماید.
-          </p>
-          <NavLink to="/test/main">شروع آزمون اصلی</NavLink>
-        </section>
-      </div>
+      <Routes></Routes>
     </div>
   );
 }

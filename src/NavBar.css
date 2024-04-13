@@ -67,7 +67,7 @@
   background-size: cover;
   border: none;
 }
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 650px) {
   .NavBar .menu-button {
     display: none;
   }

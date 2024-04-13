@@ -3,6 +3,7 @@
   src: local("Vazirmatn-Regular"),
     url("./fonts/Vazirmatn-Regular.ttf") format("truetype");
 }
+
 body {
   /* margin: 0; */
   /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",

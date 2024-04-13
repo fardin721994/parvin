@@ -1,0 +1,106 @@
+/// colors
+$col-1: #336;
+$col-2: #babae7;
+$col-3: #003;
+
+/// navi elements
+.Arrows {
+  ul {
+    padding: 0 50px 0 0;
+    list-style: none;
+    overflow: hidden;
+    display: flex;
+    font-size: 1.3rem;
+  }
+
+  li {
+    display: block;
+    white-space: nowrap;
+    &:first-of-type {
+      a,
+      .a {
+        padding-left: 35px;
+        border-left: 1px solid $col-1;
+      }
+    }
+    &.active {
+      a,
+      .a {
+        background: $col-3;
+        color: $col-2;
+      }
+    }
+    .a {
+      cursor: default;
+    }
+  }
+
+  ul {
+    a,
+    .a {
+      border-top: 1px solid $col-1;
+      border-bottom: 1px solid $col-1;
+      padding: 0 15px 0 60px;
+      display: inline-block;
+      position: relative;
+      line-height: 80px;
+      text-decoration: none;
+      color: $col-1;
+      background: $col-2;
+    }
+    a {
+      &:hover {
+        color: $col-2;
+        background: $col-1;
+      }
+    }
+  }
+
+  // Transform to rhombus approach
+  .after-as-rhombus {
+    li {
+      &.active {
+        a,
+        .a {
+          &::after {
+            border-color: $col-2;
+          }
+        }
+      }
+
+      /// link stacking order from highest to lowest
+      $countLinks: 4;
+      $highest: $countLinks;
+      @for $i from 1 through $countLinks {
+        &:nth-of-type(#{$i}) {
+          z-index: $highest;
+        }
+        $highest: $highest - 1;
+      }
+    }
+    a {
+      &:hover {
+        &::after {
+          border-color: $col-2;
+        }
+      }
+    }
+    a,
+    .a {
+      &::after {
+        content: "";
+        display: block;
+        height: 95px;
+        width: 95px;
+        transform: rotate(45deg) skew(10deg, 10deg);
+        position: absolute;
+        top: -7px;
+        z-index: -1;
+        right: -21px;
+        z-index: -1;
+        background: inherit;
+        border: 1px $col-1 solid;
+      }
+    }
+  }
+}

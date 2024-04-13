@@ -1,0 +1,32 @@
+.DataListItem {
+  width: 100%;
+  height: 100%;
+  background-color: inherit;
+  padding: 10px;
+  border-radius: 10px;
+  position: relative;
+  button {
+    border: none;
+    background-color: inherit;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    padding: 3px;
+    border-radius: 5px;
+    &:hover {
+      background: gold;
+    }
+  }
+  a {
+    background-color: blueviolet;
+    color: white;
+    display: block;
+    width: fit-content;
+    margin: 10px auto;
+    padding: 5px 10px;
+    border-radius: 10px;
+    &:hover {
+      background-color: cadetblue;
+    }
+  }
+}

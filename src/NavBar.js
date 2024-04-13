@@ -4,7 +4,7 @@ import "./NavBar.css";
 
 const tabs = [
   { title: "صفحه اصلی", to: "" },
-  { title: "آزمون", to: "testpage" },
+  { title: "آزمون", to: "test" },
   { title: "درباره آزمون", to: "about-test" },
   { title: "درباره ما", to: "about-us" },
   { title: "داده ها", to: "data" },
@@ -20,7 +20,7 @@ function NavBar() {
         <ul>
           {tabs.map(({ title, to }) => (
             <li key={title}>
-              <NavLink to={to} onClick={() => setShowNav(false)}>
+              <NavLink to={to} onClick={() => setShowNav(false)} end>
                 {title}
               </NavLink>
             </li>

@@ -1,9 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import "./Test.scss";
-import Results from "./Results";
 import Waiting from "./Waiting";
 import LoadingSpinner from "./LoadingSpinner";
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 
 // Every image is implying one of these emotions:
 const emotions = [
@@ -51,27 +50,29 @@ for (let i = 0; i < 10; i++) {
   shuffledArray1to60 = [...shuffledArray1to60, ...shuffleArray(newArray)];
 }
 /////////
-function Test({ profile }) {
+function Test({ type, setAnswers }) {
+  // *TODO: Try to remove finished state and use navigate like I did in goToNextQuestion function.
   const [index, setIndex] = useState(0); // this index will increment one by one from 0 to 59
   const [selectedOption, setSelectedOption] = useState(null);
   const [isBreakTime, setIsBreakTime] = useState(true);
   const [doneWithImageLoading, setDoneWithImageLoading] = useState(false); // Either successfully or with failure
   ////////
-  const testType = useParams().type;
   const [image, setImage] = useState(
     <img
-      src={require(`./images/${testType}/${shuffledArray1to60[0]}.jpg`)}
+      src={require(`./images/${type}/${shuffledArray1to60[0]}.jpg`)}
       onError={handleRetryLoadingImage}
       onLoad={() => setDoneWithImageLoading(true)}
     />
   );
 
   const [finished, setFinished] = useState(false);
-  const timeOutRef = useRef();
+  const testRef = useRef();
+  const scrollTimeOutRef = useRef();
+  const selectOptionTimeOutRef = useRef();
+  const navigate = useNavigate();
   ////////
-  const numberOfQuestions = testType === "sample" ? 6 : 60;
+  const numberOfQuestions = type === "sample" ? 6 : 60;
   // This array will include 60 items and each item will be true, false or null, corresponding to correct answer, wrong answer or not answered respectively:
-  const [answers, setAnswers] = useState(Array(numberOfQuestions).fill(null));
 
   ////////////
   const imageNumber = shuffledArray1to60[index];
@@ -82,7 +83,7 @@ function Test({ profile }) {
     const imageNum = shuffledArray1to60[index + 1];
     ////////////////////////////////////////////////////////
     // const reloadingImage = new Image();
-    // reloadingImage.src = `./images/${testType}/${imageNum}.jpg`;
+    // reloadingImage.src = `./images/${type}/${imageNum}.jpg`;
     // reloadingImage.onload = () => setDoneWithImageLoading(true);
     // // * This time even if there would be an error, we are going to setDoneWithImageLoading to true anyway 👇:
     // reloadingImage.onerror = () => setDoneWithImageLoading(true);
@@ -90,7 +91,7 @@ function Test({ profile }) {
     // * The following approach doesn't work because in a function component, React won't re-render the component if we are setting a state to its previous vaule again.  👇 :
     const reloadingImage = (
       <img
-        src={require(`./images/${testType}/${imageNum}.jpg`)}
+        src={require(`./images/${type}/${imageNum}.jpg`)}
         onError={() => setDoneWithImageLoading(true)}
         onLoad={() => setDoneWithImageLoading(true)}
         // *TODO : Check this out. with the same src, react won't re-render the component event though the onError is different. That was really weird. Assigning a key prop, solved the problem as react considers this image element a different one than before  👇 (I think I even tried different ids but react considered them as the same!):
@@ -103,11 +104,12 @@ function Test({ profile }) {
   ///////////
   const goToNextQuestion = () => {
     setIndex((previousIndex) => previousIndex + 1);
-    if (index + 1 === numberOfQuestions) return setFinished(true);
+    // if (index + 1 === numberOfQuestions) return setFinished(true);
+    if (index + 1 === numberOfQuestions) return navigate("/test/results"); //*! I don't know why the argument "results" won't do the job and "/test/results" does. If we use the <Navigate/> component it will be the same (we will need to use <Navigate to="/test/results" />)
     const imageNum = shuffledArray1to60[index + 1];
     const nextImage = (
       <img
-        src={require(`./images/${testType}/${imageNum}.jpg`)}
+        src={require(`./images/${type}/${imageNum}.jpg`)}
         onError={handleRetryLoadingImage}
         onLoad={() => setDoneWithImageLoading(true)}
       />
@@ -123,7 +125,7 @@ function Test({ profile }) {
     const imageNum = shuffledArray1to60[index - 1];
     const nextImage = (
       <img
-        src={require(`./images/${testType}/${imageNum}.jpg`)}
+        src={require(`./images/${type}/${imageNum}.jpg`)}
         onError={handleRetryLoadingImage}
         onLoad={() => setDoneWithImageLoading(true)}
       />
@@ -142,11 +144,11 @@ function Test({ profile }) {
         index === imageNumber - 1 ? newAnswer : item
       )
     );
-    // The first time this function runs, the timeOutRef.current will be undefined but it is fine using clearTimeout on undefined so don't worry about it 👇:
-    clearTimeout(timeOutRef.current);
-    timeOutRef.current = setTimeout(() => {
+    // The first time this function runs, the selectOptionTimeOutRef.current will be undefined but it is fine using clearTimeout on undefined so don't worry about it 👇:
+    clearTimeout(selectOptionTimeOutRef.current);
+    selectOptionTimeOutRef.current = setTimeout(() => {
       goToNextQuestion();
-    }, 1000);
+    }, 500);
   };
   /////////////
   useEffect(
@@ -170,56 +172,69 @@ function Test({ profile }) {
     },
     [isBreakTime, doneWithImageLoading]
   );
-  console.log("is break time:", isBreakTime);
-  console.log("doneWithImageLoading :", doneWithImageLoading);
+  useEffect(
+    function () {
+      setAnswers(Array(numberOfQuestions).fill(null));
+    },
+    [numberOfQuestions]
+  );
+  useEffect(function () {
+    clearTimeout(scrollTimeOutRef.current);
+    scrollTimeOutRef.current = setTimeout(() => {
+      testRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }, 1000);
+  }, []);
   ///////
   return (
-    <div className="Test" dir="rtl">
-      {finished ? (
-        <Results answers={answers} profile={profile} />
-      ) : (
-        <div className="main">
-          {image}
-          <div className="QA">
-            <div className="QA-nav">
-              <button
-                className="previous"
-                onClick={goToPreviousQuestion}
-                disabled={index === 0}
-              >
-                {/* // *This is a html chevron icon 👇:   */}
-                &#8249;
-              </button>
-              <h3>شخص چه حسی دارد؟</h3>
-              <button className="next" onClick={goToNextQuestion}>
-                &#8250;
-              </button>
-            </div>
-            <div className="options">
-              {options.map((item, index) => (
-                <button
-                  key={item.id}
-                  id={item.id}
-                  onClick={() => handleSelectOption(item.id)}
-                  className={item.id === selectedOption ? "selected" : ""}
-                  disabled={selectedOption}
-                  style={{
-                    background: `linear-gradient(to left, ${colors[index]}, 20%, snow)`,
-                  }}
-                >
-                  {item.feeling}
-                </button>
-              ))}
-            </div>
+    <div className="Test" dir="rtl" ref={testRef}>
+      <div className="main">
+        {image}
+        <div className="QA">
+          <div className="QA-nav">
+            <button
+              className="previous"
+              onClick={goToPreviousQuestion}
+              disabled={index === 0 || selectedOption}
+            >
+              {/* // *This is a html chevron icon 👇:   */}
+              &#8249;
+            </button>
+            <h3>شخص چه حسی دارد؟</h3>
+            <button
+              className="next"
+              onClick={goToNextQuestion}
+              disabled={selectedOption}
+            >
+              &#8250;
+            </button>
           </div>
-
-          <Waiting
-            display={(isBreakTime || !doneWithImageLoading).toString()}
-            setIsBreakTime={setIsBreakTime}
-            setDoneWithImageLoading={setDoneWithImageLoading}
-          />
+          <div className="options">
+            {options.map((item, index) => (
+              <button
+                key={item.id}
+                id={item.id}
+                onClick={() => handleSelectOption(item.id)}
+                className={item.id === selectedOption ? "selected" : ""}
+                disabled={selectedOption}
+                style={{
+                  background: `linear-gradient(to left, ${colors[index]}, 20%, snow)`,
+                }}
+              >
+                {item.feeling}
+              </button>
+            ))}
+          </div>
         </div>
-      )}
+
+        <Waiting
+          display={(isBreakTime || !doneWithImageLoading).toString()}
+          setIsBreakTime={setIsBreakTime}
+          setDoneWithImageLoading={setDoneWithImageLoading}
+        />
+      </div>
     </div>
   );
 }

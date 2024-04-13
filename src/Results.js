@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import axios from "axios";
 import "./Results.scss";
 const emotions = [
@@ -10,12 +10,14 @@ const emotions = [
   "surprise",
 ];
 const emojis = ["😡", "🤢", "😨", "😀", "😞", "😮"];
+const initialAnswers = Array(60).fill(null);
 ////////
 ////////
 ////////
-function Results({ answers, profile }) {
+function Results({ answers = initialAnswers, profile, showSaveButton }) {
   const [message, setMessage] = useState("");
   const [messageColor, setMessageColor] = useState("green");
+  const messageRef = useRef();
   // Handlers 👇 :
   const handleSaveResults = async () => {
     try {
@@ -43,6 +45,11 @@ function Results({ answers, profile }) {
       setMessage("Something went wrong and couldn't save the results");
       setMessageColor("red");
       console.log(error);
+    } finally {
+      messageRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
     }
   };
   // Handlers 👆
@@ -73,17 +80,21 @@ function Results({ answers, profile }) {
   const text =
     "نتایج آزمون" +
     " " +
-    `${!profile.sex ? "" : profile.sex === "مرد" ? "آقای" : "خانم"}` +
+    `${!profile.gender ? "" : profile.gender === "مرد" ? "آقای" : "خانم"}` +
     " " +
     profile.firstName +
     " " +
     profile.lastName +
     " " +
-    "به صورت زیر است";
+    "به صورت زیر است :" +
+    " ";
+  const text1 = `:نتایج آزمون ${
+    !profile.gender ? "" : profile.gender === "مرد" ? "آقای" : "خانم"
+  } ${profile.firstName} ${profile.lastName} به صورت زیر است`;
   // Calculations 👆
   return (
     <div dir="ltr" className="results">
-      <legend>{text}</legend>
+      <legend>{text1}</legend>
       <section>
         <p>Results aggregate:</p>
         <table>
@@ -153,9 +164,14 @@ function Results({ answers, profile }) {
           </tbody>
         </table>
       </section>
-      <div className="save">
+      <div
+        className="save"
+        style={{ display: `${showSaveButton ? "flex" : "none"}` }}
+      >
         <button onClick={handleSaveResults}>save</button>
-        <p style={{ color: messageColor }}>{message}</p>
+        <p style={{ color: messageColor }} ref={messageRef}>
+          {message}
+        </p>
       </div>
     </div>
   );

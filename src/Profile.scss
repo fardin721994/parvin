@@ -1,28 +1,52 @@
 .Profile {
+  flex-grow: 1;
   background-color: skyblue;
   color: darkblue;
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  justify-content: start;
   align-items: center;
-  & > div {
-    width: 100%;
-    input[type="text"] {
-      width: 100%;
-    }
-  }
-
+  gap: 20px;
   & > legend {
     text-align: center;
+    font-size: x-large;
     font-weight: 600;
+  }
+  form {
+    display: flex;
+    justify-content: space-evenly;
+    // align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    & > div {
+      width: 100%;
+      max-width: 250px;
+      input[type="text"] {
+        width: 100%;
+      }
+    }
+  }
+  a {
+    color: white;
+    background-color: blue;
+    text-align: center;
+    padding: 5px 10px;
+    border-radius: 10px;
+    &:hover {
+      background-color: deepskyblue;
+      color: darkblue;
+    }
   }
   label {
     display: block;
+    padding: 0 10px;
   }
   input {
-    padding: 3px;
+    padding: 3px 10px;
+    border-radius: 10px;
   }
-  .sex {
+  .gender {
     width: 100%;
     label {
       display: inline;

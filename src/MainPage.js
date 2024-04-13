@@ -1,4 +1,4 @@
-import "./MainPage.css";
+import "./MainPage.scss";
 import { NavLink } from "react-router-dom";
 const welcomeText = "به آزمون تشخیص" + "\n" + "خوش آمدید";
 function MainPage() {
@@ -13,7 +13,7 @@ function MainPage() {
           خوش آمدید
         </h2>
 
-        <NavLink to="./testpage">ورود به آزمون</NavLink>
+        <NavLink to="./test">ورود به آزمون</NavLink>
       </div>
       <img src={require("./icons/mainpage.jpg")} />
     </div>

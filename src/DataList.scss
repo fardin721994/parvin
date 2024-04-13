@@ -1,17 +1,14 @@
 .DataList {
+  flex-grow: 1;
   background-color: chartreuse;
   display: flex;
+  justify-content: space-evenly;
   gap: 10px;
   flex-wrap: wrap;
   padding: 10px;
-  list-style: none;
-  ul {
-    list-style: none;
-  }
   .list-item {
     width: 250px;
-    background-color: bisque;
-    padding: 10px;
-    border-radius: 5px;
+    height: fit-content;
+    border-radius: 10px;
   }
 }

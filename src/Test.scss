@@ -2,11 +2,11 @@
   width: 100%;
   flex-grow: 1;
   background-color: #dbf9d8;
-  padding: 10px;
   position: relative;
+  height: 100vh;
+
   & > * {
     display: block;
-    max-width: 350px;
     border-radius: 10px;
     margin-bottom: 5px;
     margin: 0 auto;
@@ -21,71 +21,98 @@
     flex-direction: column;
     border: solid 3px burlywood;
     border-radius: 5px;
-  }
-  img {
-    width: 100%;
-    height: 100px;
-    flex-grow: 1;
-  }
-  .QA {
-    width: 100%;
     background-color: bisque;
-    padding: 10px;
-    margin-bottom: 0;
-    padding-bottom: 0;
-    .QA-nav {
-      display: flex;
-      gap: 5px;
-      h3 {
-        background-color: coral;
-        padding: 5px;
-        text-align: center;
-        font-size: 22px;
-        color: maroon;
-      }
-      button {
-        flex-grow: 1;
-        background-color: darkgoldenrod;
-        color: black;
-        font-size: 50px;
-        line-height: 30px;
-        &:hover {
-          background-color: darkolivegreen;
-          color: cornsilk;
+    img {
+      width: 100%;
+      height: 10px;
+      flex-grow: 1;
+      border: solid 4px gray;
+    }
+    .QA {
+      width: 100%;
+      background-color: bisque;
+      padding: 10px;
+      margin-bottom: 0;
+      padding-bottom: 0;
+      .QA-nav {
+        display: flex;
+        gap: 5px;
+        h3 {
+          background-color: coral;
+          padding: 5px;
+          text-align: center;
+          font-size: 22px;
+          color: maroon;
         }
-        &:disabled {
-          opacity: 0.5;
+        button {
+          flex-grow: 1;
           background-color: darkgoldenrod;
           color: black;
-          cursor: default;
+          font-size: 50px;
+          line-height: 30px;
+          &:hover {
+            background-color: darkolivegreen;
+            color: cornsilk;
+          }
+          &:disabled {
+            opacity: 0.5;
+            background-color: darkgoldenrod;
+            color: black;
+            cursor: default;
+          }
+        }
+      }
+      .options {
+        width: 100%;
+        column-count: 2;
+        button {
+          width: 100%;
+          /* I added a fixed height to prevent displacement of option buttons when adding more thicker border on hover. */
+          height: 60px;
+          font-size: 25px;
+          font-weight: 600;
+          color: black;
+          &:enabled:hover {
+            cursor: pointer;
+            border: solid darkslateblue 5px;
+          }
+          &:disabled {
+            border-color: white;
+            opacity: 0.5;
+          }
+          &.selected {
+            border: solid darkslateblue 5px;
+            color: inherit;
+            opacity: 1;
+          }
+        }
+      }
+    }
+    // Media queries 👇:
+    @media screen and (min-width: 650px) {
+      & {
+        flex-direction: row-reverse;
+        padding: 10px;
+        justify-content: center;
+        gap: 20px;
+        align-items: center;
+        .QA {
+          margin: auto 10px;
+          border: solid 4px gray;
+          width: 350px;
+        }
+        img {
+          width: 10px;
+          max-width: 500px;
+          aspect-ratio: 3/4;
+          height: auto;
+          max-height: 100%;
         }
       }
     }
   }
-  .options {
-    width: 100%;
-    /* position: relative; */
-    column-count: 2;
-    button {
-      width: 100%;
-      /* I added a fixed height to prevent displacement of option buttons when adding more thicker border on hover. */
-      height: 60px;
-      font-size: 25px;
-      font-weight: 600;
-      color: black;
-      &:enabled:hover {
-        cursor: pointer;
-        border: solid darkslateblue 5px;
-      }
-      &:disabled {
-        border-color: white;
-        opacity: 0.5;
-      }
-      &.selected {
-        border: solid darkslateblue 5px;
-        color: inherit;
-        opacity: 1;
-      }
-    }
+  @media screen and (min-width: 650px) and (min-height: 900px) {
+    height: unset;
+    max-height: 100vh;
   }
 }
