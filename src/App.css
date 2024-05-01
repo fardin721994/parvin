@@ -21,6 +21,10 @@ ul {
   list-style: none;
 }
 label,
-input[type="radio"] {
+input[type="radio"],
+input[type="checkbox"] {
   cursor: pointer;
+}
+fieldset {
+  border: none;
 }

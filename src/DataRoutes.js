@@ -16,7 +16,6 @@ function DataRoutes() {
 
   useEffect(function () {
     const storedAdminData = JSON.parse(localStorage.getItem("adminData"));
-    // console.log("storedAdminData", storedAdminData);
 
     if (!storedAdminData)
       return navigateToLogin(
@@ -42,7 +41,7 @@ function DataRoutes() {
     };
     getData();
   }, []);
-
+  console.log("data", data);
   return (
     <Routes>
       <Route path="" element={<DataList data={data} setData={setData} />} />

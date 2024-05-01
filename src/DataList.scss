@@ -1,14 +1,36 @@
 .DataList {
-  flex-grow: 1;
-  background-color: chartreuse;
   display: flex;
-  justify-content: space-evenly;
-  gap: 10px;
-  flex-wrap: wrap;
-  padding: 10px;
-  .list-item {
-    width: 250px;
-    height: fit-content;
-    border-radius: 10px;
+  flex-direction: column;
+  flex-grow: 1;
+  header {
+    background-color: beige;
+    display: flex;
+    justify-content: space-around;
+    padding: 5px 0;
+    button {
+      background-image: url("./icons/tune.svg");
+      width: 40px;
+      height: 40px;
+      background-size: cover;
+      border-radius: 5px;
+      &:hover {
+        background-color: cadetblue;
+      }
+    }
+  }
+
+  .list {
+    flex-grow: 1;
+    background-color: chartreuse;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding: 10px;
+    .list-item {
+      width: 250px;
+      height: fit-content;
+      border-radius: 10px;
+    }
   }
 }

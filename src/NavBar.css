@@ -79,7 +79,7 @@
   }
   .NavBar #nav ul {
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     align-items: center;
   }
   .NavBar #nav ul li {

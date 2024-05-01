@@ -13,7 +13,6 @@
   }
   * {
     border-radius: 10px;
-    margin-bottom: 5px;
   }
   .main {
     height: 100%;
@@ -22,21 +21,38 @@
     border: solid 3px burlywood;
     border-radius: 5px;
     background-color: bisque;
-    img {
+    .image {
+      position: relative;
       width: 100%;
       height: 10px;
       flex-grow: 1;
-      border: solid 4px gray;
+
+      img {
+        width: 100%;
+        height: 100%;
+        // border: solid 4px gray;
+      }
+      span {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        background-color: grey;
+        color: white;
+        font-size: larger;
+        padding: 0px 8px;
+        border-radius: 0 10px 0 10px;
+      }
     }
     .QA {
       width: 100%;
       background-color: bisque;
       padding: 10px;
-      margin-bottom: 0;
-      padding-bottom: 0;
+
       .QA-nav {
         display: flex;
         gap: 5px;
+        margin-bottom: 5px;
+
         h3 {
           background-color: coral;
           padding: 5px;
@@ -50,10 +66,14 @@
           color: black;
           font-size: 50px;
           line-height: 30px;
-          &:hover {
-            background-color: darkolivegreen;
-            color: cornsilk;
+          //? Using a hover effect causes buttons to stay stuck in the hovered state when tapped on touch devices. The condition ‘hover: hover’ refers to the devices that support hover 👇 :
+          @media (hover: hover) {
+            &:hover {
+              background-color: darkolivegreen;
+              color: cornsilk;
+            }
           }
+
           &:disabled {
             opacity: 0.5;
             background-color: darkgoldenrod;
@@ -72,9 +92,11 @@
           font-size: 25px;
           font-weight: 600;
           color: black;
-          &:enabled:hover {
-            cursor: pointer;
-            border: solid darkslateblue 5px;
+          @media (hover: hover) {
+            &:enabled:hover {
+              cursor: pointer;
+              border: solid darkslateblue 5px;
+            }
           }
           &:disabled {
             border-color: white;
@@ -101,12 +123,18 @@
           border: solid 4px gray;
           width: 350px;
         }
-        img {
+        .image {
           width: 10px;
           max-width: 500px;
-          aspect-ratio: 3/4;
-          height: auto;
-          max-height: 100%;
+          height: 100%;
+
+          img {
+            aspect-ratio: 3/4;
+            height: auto;
+            max-height: 100%;
+            width: 100%;
+            height: 100%;
+          }
         }
       }
     }

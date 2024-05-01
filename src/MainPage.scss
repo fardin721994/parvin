@@ -14,9 +14,10 @@
       }
     }
     a {
-      font-size: x-large;
       background-color: darkgoldenrod;
-      padding: 3px 10px;
+      font-size: larger;
+      font-weight: bold;
+      padding: 7px 20px;
       margin: 15px;
       border: solid 2px saddlebrown;
       border-radius: 25px;
@@ -31,7 +32,7 @@
   img {
     width: 100%;
     max-width: 700px;
-    border-radius: 80px;
+    border-radius: 20px;
   }
 
   // Media queries 👇:

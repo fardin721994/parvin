@@ -191,7 +191,10 @@ function Test({ type, setAnswers }) {
   return (
     <div className="Test" dir="rtl" ref={testRef}>
       <div className="main">
-        {image}
+        <div className="image">
+          {image}
+          <span dir="ltr">{`${index + 1} of 60`}</span>
+        </div>
         <div className="QA">
           <div className="QA-nav">
             <button
