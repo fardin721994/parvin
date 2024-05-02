@@ -6,7 +6,7 @@ import { Navigate, useNavigate, Route, Routes } from "react-router-dom";
 
 function DataRoutes() {
   const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const navigate = useNavigate();
 
@@ -25,7 +25,7 @@ function DataRoutes() {
       );
 
     const getData = async () => {
-      setIsLoading(true);
+      // setIsLoading(true);
       try {
         const res = await axios.get(
           process.env.REACT_APP_BACKEND_URL + "/results",

@@ -28,6 +28,7 @@ export default function Filter({ data, setFilteredData, className }) {
   ////////
   useEffect(
     function () {
+      if (data.length === 0) return;
       let filteredData;
       filteredData = !selectedFilters.includes("نام")
         ? data

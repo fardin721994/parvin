@@ -5,7 +5,7 @@ import DataListItem from "./DataListItem";
 import Filter from "./Filter";
 
 function DataList({ data, setData, isLoading }) {
-  const [filteredData, setFilteredData] = useState(data);
+  const [filteredData, setFilteredData] = useState(null);
   const [showFilters, setShowFilters] = useState(false);
   const handleRemoveData = async (id) => {
     const storedAdminData = JSON.parse(localStorage.getItem("adminData"));
@@ -25,8 +25,8 @@ function DataList({ data, setData, isLoading }) {
   return (
     <div className="DataList">
       <header>
-        {isLoading ? (
-          <h2>شکیبا باشید...</h2>
+        {isLoading || !filteredData ? (
+          <h2>لطفاً شکیبا باشید...</h2>
         ) : (
           <h2>{`${filteredData.length} نتیجه یافت شد`}</h2>
         )}
@@ -40,22 +40,24 @@ function DataList({ data, setData, isLoading }) {
         className={`${showFilters ? "show" : "hidden"}`}
       />
       <ul className="list">
-        {filteredData.map((item, index) => (
-          <li
-            key={item.id}
-            className="list-item"
-            style={{
-              backgroundColor: `${index % 2 === 0 ? "azure" : "cornsilk"}`,
-            }}
-          >
-            <DataListItem
-              profile={item._doc.profile}
-              results={item._doc.results}
-              id={item.id}
-              handleRemoveData={() => handleRemoveData(item.id)}
-            />
-          </li>
-        ))}
+        {!filteredData
+          ? null
+          : filteredData.map((item, index) => (
+              <li
+                key={item.id}
+                className="list-item"
+                style={{
+                  backgroundColor: `${index % 2 === 0 ? "azure" : "cornsilk"}`,
+                }}
+              >
+                <DataListItem
+                  profile={item._doc.profile}
+                  results={item._doc.results}
+                  id={item.id}
+                  handleRemoveData={() => handleRemoveData(item.id)}
+                />
+              </li>
+            ))}
       </ul>
     </div>
   );
