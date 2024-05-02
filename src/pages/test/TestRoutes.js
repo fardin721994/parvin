@@ -4,7 +4,7 @@ import TestTypeSelect from "./TestTypeSelect";
 import Test from "./Test";
 import Results from "./Results";
 import { useState } from "react";
-import TestSteps from "./TestSteps";
+import TestSteps from "../../components/TestSteps";
 import "./TestRoutes.scss";
 const initialProfileData = {
   firstName: "",

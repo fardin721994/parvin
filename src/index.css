@@ -1,7 +1,7 @@
 @font-face {
   font-family: "Vazirmatn-Regular"; /*Can be any text*/
   src: local("Vazirmatn-Regular"),
-    url("./fonts/Vazirmatn-Regular.ttf") format("truetype");
+    url("./assets/fonts/Vazirmatn-Regular.ttf") format("truetype");
 }
 
 body {

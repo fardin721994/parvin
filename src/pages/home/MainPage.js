@@ -15,7 +15,7 @@ function MainPage() {
 
         <NavLink to="./test">ورود به آزمون</NavLink>
       </div>
-      <img src={require("./icons/mainpage.jpg")} />
+      <img src={require("assets/icons/mainpage.jpg")} />
     </div>
   );
 }

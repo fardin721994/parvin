@@ -1,5 +1,4 @@
-import React from "react";
-import Results from "./Results";
+import Results from "../test/Results";
 import { useParams } from "react-router-dom";
 
 function ResultsDetails({ data }) {

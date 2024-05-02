@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useState } from "react";
 import "./DataList.scss";
-import DataListItem from "./DataListItem";
-import Filter from "./Filter";
+import DataListItem from "components/DataListItem";
+import Filter from "components/Filter";
 
 function DataList({ data, setData, isLoading }) {
   const [filteredData, setFilteredData] = useState(null);

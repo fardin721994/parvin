@@ -1,21 +1,15 @@
 import React from "react";
 import "./App.css";
-import "./fonts/Vazirmatn-Regular.ttf";
+import "./assets/fonts/Vazirmatn-Regular.ttf";
 import { Routes, Route, Navigate } from "react-router-dom";
 
-import NavBar from "./NavBar";
-import MainPage from "./MainPage";
-import AboutTest from "./AboutTest";
-import AboutUs from "./AboutUs";
-import DataList from "./DataList";
-import TestRoutes from "./TestRoutes";
-import TestSteps from "./TestSteps";
-import Arrows from "./Arrows";
-import ArrowTest from "./ArrowTest";
-import Test from "./Test";
-import DataListItem from "./DataListItem";
-import DataRoutes from "./DataRoutes";
-import Login from "./Login";
+import NavBar from "./components/NavBar";
+import MainPage from "./pages/home/MainPage";
+import AboutTest from "./pages/about-test/AboutTest";
+import AboutUs from "./pages/about-us/AboutUs";
+import TestRoutes from "./pages/test/TestRoutes";
+import DataRoutes from "./pages/data/DataRoutes";
+import Login from "./pages/login/Login";
 
 ////////////
 function App() {

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import "./Test.scss";
 import Waiting from "./Waiting";
-import LoadingSpinner from "./LoadingSpinner";
+import LoadingSpinner from "components/LoadingSpinner";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 
 // Every image is implying one of these emotions:
@@ -59,7 +59,7 @@ function Test({ type, setAnswers }) {
   ////////
   const [image, setImage] = useState(
     <img
-      src={require(`./images/${type}/${shuffledArray1to60[0]}.jpg`)}
+      src={require(`assets/images/${type}/${shuffledArray1to60[0]}.jpg`)}
       onError={handleRetryLoadingImage}
       onLoad={() => setDoneWithImageLoading(true)}
     />
@@ -91,7 +91,7 @@ function Test({ type, setAnswers }) {
     // * The following approach doesn't work because in a function component, React won't re-render the component if we are setting a state to its previous vaule again.  👇 :
     const reloadingImage = (
       <img
-        src={require(`./images/${type}/${imageNum}.jpg`)}
+        src={require(`assets/images/${type}/${imageNum}.jpg`)}
         onError={() => setDoneWithImageLoading(true)}
         onLoad={() => setDoneWithImageLoading(true)}
         // *TODO : Check this out. with the same src, react won't re-render the component event though the onError is different. That was really weird. Assigning a key prop, solved the problem as react considers this image element a different one than before  👇 (I think I even tried different ids but react considered them as the same!):
@@ -109,7 +109,7 @@ function Test({ type, setAnswers }) {
     const imageNum = shuffledArray1to60[index + 1];
     const nextImage = (
       <img
-        src={require(`./images/${type}/${imageNum}.jpg`)}
+        src={require(`assets/images/${type}/${imageNum}.jpg`)}
         onError={handleRetryLoadingImage}
         onLoad={() => setDoneWithImageLoading(true)}
       />
@@ -125,7 +125,7 @@ function Test({ type, setAnswers }) {
     const imageNum = shuffledArray1to60[index - 1];
     const nextImage = (
       <img
-        src={require(`./images/${type}/${imageNum}.jpg`)}
+        src={require(`assets/images/${type}/${imageNum}.jpg`)}
         onError={handleRetryLoadingImage}
         onLoad={() => setDoneWithImageLoading(true)}
       />
@@ -193,7 +193,7 @@ function Test({ type, setAnswers }) {
       <div className="main">
         <div className="image">
           {image}
-          <span dir="ltr">{`${index + 1} of 60`}</span>
+          <span dir="ltr">{`${index + 1} of ${numberOfQuestions}`}</span>
         </div>
         <div className="QA">
           <div className="QA-nav">
