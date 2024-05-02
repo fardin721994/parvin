@@ -6,6 +6,8 @@ import { Navigate, useNavigate, Route, Routes } from "react-router-dom";
 
 function DataRoutes() {
   const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
   const navigate = useNavigate();
 
   const navigateToLogin = (message) => {
@@ -23,6 +25,7 @@ function DataRoutes() {
       );
 
     const getData = async () => {
+      setIsLoading(true);
       try {
         const res = await axios.get(
           process.env.REACT_APP_BACKEND_URL + "/results",
@@ -37,6 +40,8 @@ function DataRoutes() {
         return navigateToLogin(
           ":دسترسی به داده ها فقط برای ادمین ها امکان پذیر است. لطفاً از طریق فرم زیر وارد شوید"
         );
+      } finally {
+        setIsLoading(false);
       }
     };
     getData();
@@ -44,7 +49,12 @@ function DataRoutes() {
   console.log("data", data);
   return (
     <Routes>
-      <Route path="" element={<DataList data={data} setData={setData} />} />
+      <Route
+        path=""
+        element={
+          <DataList data={data} setData={setData} isLoading={isLoading} />
+        }
+      />
       <Route path="/:id" element={<ResultsDetails data={data} />} />
       <Route path="*" element={<Navigate to="" replace />} />
     </Routes>

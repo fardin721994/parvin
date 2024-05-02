@@ -4,7 +4,7 @@ import "./DataList.scss";
 import DataListItem from "./DataListItem";
 import Filter from "./Filter";
 
-function DataList({ data, setData }) {
+function DataList({ data, setData, isLoading }) {
   const [filteredData, setFilteredData] = useState(data);
   const [showFilters, setShowFilters] = useState(false);
   const handleRemoveData = async (id) => {
@@ -25,7 +25,11 @@ function DataList({ data, setData }) {
   return (
     <div className="DataList">
       <header>
-        <h2>{`${filteredData.length} نتیجه یافت شد`}</h2>
+        {isLoading ? (
+          <h2>شکیبا باشید...</h2>
+        ) : (
+          <h2>{`${filteredData.length} نتیجه یافت شد`}</h2>
+        )}
         <button
           onClick={() => setShowFilters((previous) => !previous)}
         ></button>
