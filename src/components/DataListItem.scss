@@ -18,10 +18,11 @@
     }
   }
   a {
-    background-color: blueviolet;
-    color: white;
+    background-image: url("../assets/icons/more.svg");
+    width: 40px;
+    height: 40px;
+    background-size: contain;
     display: block;
-    width: fit-content;
     margin: 10px auto;
     padding: 5px 10px;
     border-radius: 10px;

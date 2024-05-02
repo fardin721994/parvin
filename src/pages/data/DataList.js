@@ -32,6 +32,7 @@ function DataList({ data, setData, isLoading }) {
         )}
         <button
           onClick={() => setShowFilters((previous) => !previous)}
+          title="show/hide filters"
         ></button>
       </header>
       <Filter

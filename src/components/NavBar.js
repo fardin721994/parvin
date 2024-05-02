@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "./NavBar.css";
 
 const tabs = [
@@ -27,11 +27,7 @@ function NavBar() {
           ))}
         </ul>
       </nav>
-      <NavLink
-        to=""
-        className="logo"
-        onClick={() => setShowNav(false)}
-      ></NavLink>
+      <Link to="" className="logo" onClick={() => setShowNav(false)}></Link>
     </div>
   );
 }

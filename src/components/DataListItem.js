@@ -13,12 +13,14 @@ function DataListItem({ profile, results, id, handleRemoveData }) {
         <li>{`پاسخ های غلط: ${results.byAnswerStatus.wrong}`}</li>
         <li>{`پاسخ نداده: ${results.byAnswerStatus.missed}`}</li>
       </ul>
-      <button className="remove" onClick={handleRemoveData}>
+      <button
+        className="remove"
+        onClick={handleRemoveData}
+        title="remove this data"
+      >
         ❌
       </button>
-      <NavLink className="more" to={`${id}`}>
-        اطلاعات بیشتر
-      </NavLink>
+      <NavLink className="more" to={`${id}`} title="more details"></NavLink>
     </div>
   );
 }
