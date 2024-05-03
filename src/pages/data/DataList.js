@@ -5,8 +5,11 @@ import DataListItem from "components/DataListItem";
 import Filter from "components/Filter";
 
 function DataList({ data, setData, isLoading }) {
+  // State variables 👇:
   const [filteredData, setFilteredData] = useState(null);
   const [showFilters, setShowFilters] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  // Handlers 👇:
   const handleRemoveData = async (id) => {
     const storedAdminData = JSON.parse(localStorage.getItem("adminData"));
     try {
@@ -56,10 +59,15 @@ function DataList({ data, setData, isLoading }) {
                   results={item._doc.results}
                   id={item.id}
                   handleRemoveData={() => handleRemoveData(item.id)}
+                  setShowModal={setShowModal}
                 />
               </li>
             ))}
       </ul>
+      <div
+        className="modal"
+        style={{ display: `${showModal ? "block" : "none"}` }}
+      ></div>
     </div>
   );
 }
