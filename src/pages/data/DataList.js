@@ -33,10 +33,12 @@ function DataList({ data, setData, isLoading }) {
         ) : (
           <h2>{`${filteredData.length} نتیجه یافت شد`}</h2>
         )}
-        <button
-          onClick={() => setShowFilters((previous) => !previous)}
-          title="show/hide filters"
-        ></button>
+        <div>
+          <span>اعمال فیلتر:</span>
+          <button
+            onClick={() => setShowFilters((previous) => !previous)}
+          ></button>
+        </div>
       </header>
       <Filter
         data={data}

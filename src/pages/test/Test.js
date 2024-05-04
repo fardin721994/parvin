@@ -38,7 +38,7 @@ const options = [
   { feeling: "ترس", id: "fear" },
   { feeling: "انزجار", id: "disgust" },
 ];
-const breakTime = 500; // The time gap between qustions
+const breakTime = 50000; // The time gap between qustions
 const answerTime = 600000; // The time to answer a question
 
 // This function will shuffle any given array:

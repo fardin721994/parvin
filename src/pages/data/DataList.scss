@@ -8,16 +8,25 @@
     display: flex;
     justify-content: space-around;
     padding: 5px 0;
-    button {
-      background-image: url("../../assets/icons/tune.svg");
-      width: 40px;
-      height: 40px;
-      background-size: cover;
-      border-radius: 5px;
-      &:hover {
-        background-color: cadetblue;
+    div {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      span {
+        font-size: larger;
+      }
+      button {
+        background-image: url("../../assets/icons/tune.svg");
+        width: 40px;
+        height: 40px;
+        background-size: cover;
+        border-radius: 5px;
+        &:hover {
+          background-color: cadetblue;
+        }
       }
     }
+
     h2 {
       width: 250px;
     }
