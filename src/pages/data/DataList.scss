@@ -6,8 +6,12 @@
   header {
     background-color: beige;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
     padding: 5px 0;
+    h2 {
+      text-align: center;
+    }
     div {
       display: flex;
       align-items: center;
